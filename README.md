@@ -15,18 +15,18 @@ The `suffix` can be provided in two ways:
 1. As a command line argument with the `-suffix` flag. For example:
 
 ```bash
-./setgituser -suffix john
+setgituser -suffix john
 ```
 
 2. As the first non-flag argument. For example:
 
 ```bash
-./setgituser john
+setgituser john
 ```
 
-In both cases, the application will look for the environment variables "GIT_NAME_JOHN" and "GIT_EMAIL_JOHN".
+In both cases, the application will look for the environment variables `GIT_NAME_JOHN` and `GIT_EMAIL_JOHN`.
 
-If no suffix is passed to the application, it will default to using the environment variables "GIT_NAME" and "GIT_EMAIL" to set the git name and email respectively. 
+If no suffix is passed to the application, it will default to using the environment variables `GIT_NAME` and `GIT_EMAIL` to set the git name and email respectively. 
 
 Here's an example:
 
@@ -34,7 +34,7 @@ Here's an example:
 export GIT_NAME="Default User"
 export GIT_EMAIL="default.user@example.com"
 
-./setgituser
+setgituser
 ```
 
-In this case, the application will set the git name to "Default User" and the git email to "default.user@example.com". If either "GIT_NAME" or "GIT_EMAIL" is not set in the environment variables, the application will print an error message and exit.
+In this case, the application will set the git name to "Default User" and the git email to "default.user@example.com". If either `GIT_NAME` or `GIT_EMAIL` is not set in the environment variables, the application will print an error message and exit.
