@@ -1,5 +1,5 @@
 BINARY_NAME=setgituser
-NSTALL_DIR=/usr/local/bin
+INSTALL_DIR=/usr/local/bin
 
 # Default target
 all: build

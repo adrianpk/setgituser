@@ -17,6 +17,7 @@ import (
 
 func main() {
 	suffix := flag.String("suffix", "", "Suffix for the git name and email environment variables")
+	global := flag.Bool("global", false, "Set the git name and email globally")
 	flag.Parse()
 
 	if flag.NArg() > 0 {
@@ -40,9 +41,28 @@ func main() {
 		os.Exit(1)
 	}
 
-	exec.Command("git", "config", "user.name", name).Run()
-	exec.Command("git", "config", "user.email", email).Run()
+	if *global {
+		output, err := exec.Command("git", "config", "--global", "user.name", name).CombinedOutput()
+		if err != nil {
+			fmt.Printf("Failed to set global git name: %v, output: %s\n", err, output)
+			os.Exit(1)
+		}
+		output, err = exec.Command("git", "config", "--global", "user.email", email).CombinedOutput()
+		if err != nil {
+			fmt.Printf("Failed to set global git email: %v, output: %s\n", err, output)
+			os.Exit(1)
+		}
+		return
+	}
 
-	fmt.Printf("Git name set to: %s\n", name)
-	fmt.Printf("Git email set to: %s\n", email)
+	output, err := exec.Command("git", "config", "user.name", name).CombinedOutput()
+	if err != nil {
+		fmt.Printf("Failed to set git name: %v, output: %s\n", err, output)
+		os.Exit(1)
+	}
+	output, err = exec.Command("git", "config", "user.email", email).CombinedOutput()
+	if err != nil {
+		fmt.Printf("Failed to set git email: %v, output: %s\n", err, output)
+		os.Exit(1)
+	}
 }
